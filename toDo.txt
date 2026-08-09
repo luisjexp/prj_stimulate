@@ -1,0 +1,24 @@
+to do
+
+
+
+Set Stim Parameters == Petrau 
+
+stim
+	
+- Set mouse correct distance
+- Dot Speed?
+- dot diameter = 2 degress
+	
+- no collision
+	- life time
+	
+- 20% coverage
+	
+
+
+reward calibration system
+	- 1000 pulses
+
+
+

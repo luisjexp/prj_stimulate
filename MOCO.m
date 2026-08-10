@@ -178,9 +178,9 @@ classdef Moco_r2017b_exported < matlab.apps.AppBase
                     getMessage  = StimMessages.get_currentDirection ;                         
             end
     
-            app.stmCmd.write(setMessage); pause(.025);
-            app.stmCmd.write(newValue);   pause(.025);            
-            app.stmCmd.write(getMessage);
+            app.stmCmd.Write(setMessage); pause(.025);
+            app.stmCmd.Write(newValue);   pause(.025);            
+            app.stmCmd.Write(getMessage);
             [retreivedValue, info, updateFailed]= app.stmCmd.waitForMessage(2);
             retreivedValue =  str2double(retreivedValue);
             
@@ -750,7 +750,7 @@ classdef Moco_r2017b_exported < matlab.apps.AppBase
                 trial = 0;                
                 app.dispAlert([0 0 0], 'Will Start When Lick');
                 while app.phase.keepTraining()
-                    app.readBehavior;
+                    app.readBehavior
                     if app.ard.sensorState == 1
                         logIt({app.time.tElapsed, trial, 'StartingPhase', nan});
                         break;
@@ -816,7 +816,7 @@ classdef Moco_r2017b_exported < matlab.apps.AppBase
         % Value changed function: StimViews_list
         function select_StimViews_lst(app, event)
             stimview = app.StimViews_list.Value;
-            [msg, failed] = app.stmCmd.write(stimview);
+            [msg, failed] = app.stmCmd.Write(stimview);
             if ~failed
                 app.log.write2DataFile({app.time.tElapsed, 'Viewer', sprintf('Showing%s', stimview), nan}, DataLog.systemFile_extension);
             else

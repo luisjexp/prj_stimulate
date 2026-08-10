@@ -69,7 +69,7 @@ classdef Arduino < handle
                 disp('Cannot read sensor: Arduino not connected');                
             end
             
-            if strcmp(readKey, 'l') 
+            if strcmp(readKey, 'l') || strcmp(readKey, '1!') 
                 sensorState = 1;
             end
             

@@ -8,7 +8,7 @@ classdef Devices
         onLuisMac   = contains(cd, 'luis') && ismac;
         
         luisMacIp   = '192.168.0.2';
-        luisPcIp    = '192.168.0.3';
+        luisPcIp    = '192.168.1.201';
 
         trachPcPort = 30000;              
         luisMacPort = 50002;

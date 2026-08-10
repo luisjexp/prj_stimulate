@@ -20,15 +20,19 @@ classdef StimScreen < handle
     function obj = openWindow(obj)
         sca;
         if Devices.isDebugging
-            rect = [obj.screenRect(3)-500 0 obj.screenRect(3) obj.screenRect(4)-200];               
+            rect = [obj.screenRect(3)-500 0 obj.screenRect(3) obj.screenRect(4)-200];   
+			rect = [];
+			Screen('Preference', 'SkipSyncTests', 1);
         else
             rect = [];
         end
         scrnNum = Screen('Screens');
-        [obj.windowPtr, obj.dispRect] = Screen('OpenWindow',scrnNum, 127*[1 1 1], rect);
+        % [obj.windowPtr, obj.dispRect] = Screen('OpenWindow',scrnNum(end), 127*[1 1 1], rect,'SkipSyncTests',SkipSyncTests);
+		[obj.windowPtr, obj.dispRect] = Screen('OpenWindow',scrnNum(end), 127*[1 1 1], rect);
+
         Screen('MATLABToFront')
         obj.status = 'open';                        
-        Screen('Preference', 'SkipSyncTests', 1);
+        
         Screen('Preference', 'Verbosity', 0);  
         obj.dispCx = mean(obj.dispRect([1 3]));         % center x of display (not the screen), with respect to display
         obj.dispCy = mean(obj.dispRect([2 4]));         % center y of display (not the screen), with respect to display

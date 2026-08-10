@@ -13,18 +13,21 @@ classdef StimProgram < handle & StimScreen & StimServer & DotPop
         function obj = StimProgram
             try
                 obj.start;
-            catch ME                
+            catch ME      
+				fprintf('\n***ERROR in Stim Program, trying to close***\n')
                 obj.closeScreen;
-                obj.closeServer ;                    
-                fprintf('\n***ERROR in Stim Program but Safely Closed***\n')
+				rethrow(ME)
+                % obj.closeServer ;                    
+                % fprintf('\n***\tSafely Closed***\n')
                 rethrow(ME)
             end 
         end
         
         function start(obj)
-            obj.openWindow;
-            obj.intializeDotPop;
-            obj.openServer;            
+			obj.openWindow;
+			obj.intializeDotPop;
+			obj.openServer;
+
             obj.msgFromCmd = StimMessages.view_waitScreen;
             while true
                 switch obj.msgFromCmd  
@@ -54,6 +57,7 @@ classdef StimProgram < handle & StimScreen & StimServer & DotPop
                          obj.sendPropertyValue('currentDirection');                           
                     case StimMessages.shutDown
                         obj.shutdown ;
+					
                 end
             end
         end
@@ -67,7 +71,8 @@ classdef StimProgram < handle & StimScreen & StimServer & DotPop
                 obj.msgFromCmd = obj.readMessageIfAvailable;
                 if any(strcmp(obj.msgFromCmd, StimMessages.getAllValidMessages))
                    break 
-                end             
+				end   
+				
             end
         end
         
@@ -154,8 +159,10 @@ classdef StimProgram < handle & StimScreen & StimServer & DotPop
                     obj.msgFromCmd = StimMessages.view_waitScreen;
                 case 'coherence'
                     c = num2str(round(100*obj.coherence/obj.numDots));
+					fprintf("\nWriting Coherence to Commander...")
                     obj.write2Commander(c);
-                    obj.msgFromCmd = StimMessages.view_waitScreen;   
+                    fprintf("sent!\n")
+					obj.msgFromCmd = StimMessages.view_waitScreen;   
                 case 'currentDirection'
                     obj.signalDots_direction
                     obj.write2Commander(num2str(obj.signalDots_direction));

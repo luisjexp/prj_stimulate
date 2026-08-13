@@ -13,10 +13,10 @@ classdef Devices
         trachPcPort = 30000;              
         luisMacPort = 50002;
         luisPcPort  = 50003;      
-        wheelPort   = 'COM15'; 
-        arduinoPort = 'COM17'; 
+        wheelPort   = 'COM3'; 
+        arduinoPort = 'COM3'; 
               
-        arduinoNameTag  = 'arduinoLickPort';
+        arduinoNameTag  = 'arduino';
         wheelNameTag    = 'ArCOM'; % name tag comes from bpod library
         stimCmdNameTag  = 'stimCommander';
         stimPrgNameTag  = 'stimProgram';

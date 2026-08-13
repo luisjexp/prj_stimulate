@@ -14,9 +14,9 @@ classdef Wheel < handle
     methods 
         function msg = callWheel(obj)  
             tStart = tic;      
-            while toc(tStart) < 30 && Devices.onTrachPc          
+            while toc(tStart) < 30 % && Devices.onTrachPc          
                 try
-                    delete(instrfind('tag', Devices.wheelNameTag));
+                    % delete(instrfind('tag', Devices.wheelNameTag));
                     pause(.25);
                     obj.Mod = RotaryEncoderModule(Devices.wheelPort); 
                     fopen(obj.Mod);               

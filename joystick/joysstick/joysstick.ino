@@ -1,28 +1,39 @@
-// Explicitly declare Analog pins
-const int JoyStick_X = A0; // x-axis
-const int JoyStick_Y = A1; // y-axis
-const int JoyStick_Z = 3;  // button/key (Digital Pin 3)
+const int JoyStick_X = A0;
+const int JoyStick_Y = A1;
+const int JoyStick_Z = 3;
 
 void setup() {
-  // Use internal pull-up resistor to prevent floating readings on the button
-  pinMode(JoyStick_Z, INPUT_PULLUP); 
-  Serial.begin(9600); // 9600 bps baud rate
+  pinMode(JoyStick_Z, INPUT_PULLUP);
+  Serial.begin(9600);
 }
 
 void loop() {
   int x = analogRead(JoyStick_X);
   int y = analogRead(JoyStick_Y);
+
+  // INPUT_PULLUP means LOW = pressed, HIGH = not pressed.
+  int b = digitalRead(JoyStick_Z);
+
+//  Serial.print(x);
+//  Serial.print(",");
+//  Serial.print(y);
+//  Serial.print(",");
+//  Serial.println(b*2000);
   
-  // With INPUT_PULLUP: 1 = Not Pressed, 0 = Pressed
-  int z = digitalRead(JoyStick_Z); 
-
-  // Print as a clean CSV line: "x,y,z\n"
+  Serial.print("{\"protocol\":\"device-api\"");
+  Serial.print(",\"version\":\"0.1\"");
+  Serial.print(",\"message_type\":\"arduino_joystick_1.sample\"");
+  Serial.print(",\"source\":\"arduino_joystick_1\"");
+  Serial.print(",\"timestamp_ms\":");
+  Serial.print(millis());
+  Serial.print(",\"payload\":{");
+  Serial.print("\"x\":");
   Serial.print(x);
-  Serial.print(",");
+  Serial.print(",\"y\":");
   Serial.print(y);
-  Serial.print(",");
-  Serial.println(z);
+  Serial.print(",\"b\":");
+  Serial.print(b);
+  Serial.println("}}");
 
-  delay(100); // 10 Hz update rate
+  delay(250);
 }
-

@@ -10,11 +10,10 @@ kafka/cluster_rig_config_env.py
 
 # SCRATCH/BUILDING
 toDo.txt
-/ccloud-python-client
 00 method.xlsx
 sim_LocoXOnOff.m
 /kafka/scratch
-kafka/scratchpad.py
+*scratchpad.py
 
 # IDE/TOOLS
 *.vscode

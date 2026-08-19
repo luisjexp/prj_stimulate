@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Device API Message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol", "version", "message_type", "source", "payload"],
+  "properties": {
+    "protocol": {
+      "const": "device-api"
+    },
+    "version": {
+      "const": "0.1"
+    },
+    "timestamp_ms": {
+      "type": "integer"
+    },
+    "source": {
+      "enum": ["arduino_joystick_1", "python_session_1", "matlab_session_1", "arduino_sensor_1"]
+    },
+    "message_type": {
+      "enum": ["arduino_joystick_1.sample", "system.error"]
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "message_type": { "const": "arduino_joystick_1.sample" }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["x", "y", "b"],
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "b": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "message_type": { "const": "system.error" }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "message"],
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

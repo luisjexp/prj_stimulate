@@ -23,11 +23,10 @@ void loop() {
   Serial.print("{\"protocol\":\"device-api\"");
   Serial.print(",\"version\":\"0.1\"");
   Serial.print(",\"message_type\":\"arduino_joystick_1.sample\"");
-  Serial.print(",\"source\":\"arduino_joystick_1\"");
-  Serial.print(",\"timestamp_ms\":");
-  Serial.print(millis());
   Serial.print(",\"payload\":{");
-  Serial.print("\"x\":");
+  Serial.print("\"time\":"); 
+  Serial.print(millis());
+  Serial.print(",\"x\":");
   Serial.print(x);
   Serial.print(",\"y\":");
   Serial.print(y);
@@ -35,5 +34,5 @@ void loop() {
   Serial.print(b);
   Serial.println("}}");
 
-  delay(250);
+  delay(100);
 }

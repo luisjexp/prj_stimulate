@@ -14,11 +14,11 @@ toDo.txt
 sim_LocoXOnOff.m
 /kafka/scratch
 *scratchpad.py
+*scratch.py
+*scratch_*.py
 
 # IDE/TOOLS
 *.vscode
 *.asv
 *.pyc
 *.prj
-
-

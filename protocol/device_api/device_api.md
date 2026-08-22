@@ -24,8 +24,6 @@ One JSON object per line.
 | `protocol` | string | yes | Must be `device-api`. |
 | `version` | string | yes | Protocol version. |
 | `message_type` | string | yes | Allowed message type. |
-| `source` | string | yes | Sender id. |
-| `timestamp_ms` | integer | optional | Sender-local timestamp in milliseconds. |
 | `payload` | object | yes | Message-specific data. |
 
 ## Schema Validation
@@ -50,16 +48,6 @@ source
 payload
 ```
 
-## Device Names
-
-Allowed `source` values:
-
-```text
-arduino_joystick_1
-python_session_1
-matlab_session_1
-arduino_sensor_1
-```
 
 ## Message Types
 
@@ -78,8 +66,8 @@ system.error
   "version": "0.1",
   "message_type": "arduino_joystick_1.sample",
   "source": "arduino_joystick_1",
-  "timestamp_ms": 123456,
   "payload": {
+    "time": 123456,
     "x": 512,
     "y": 488,
     "b": 0
@@ -91,6 +79,7 @@ Payload fields:
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `time` | number | yes | Sender-local timestamp in milliseconds.|
 | `x` | integer | yes | Raw joystick X reading. |
 | `y` | integer | yes | Raw joystick Y reading. |
 | `b` | integer | yes | Button state. |
@@ -103,7 +92,6 @@ Payload fields:
   "version": "0.1",
   "message_type": "system.error",
   "source": "python_session_1",
-  "timestamp_ms": 1780000000000,
   "payload": {
     "code": "invalid_payload",
     "message": "arduino_joystick_1.sample payload missing x"

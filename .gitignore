@@ -3,21 +3,23 @@
 /beh_data
 /resources
 
+
 # KEYS
+/kafka/cluster_rig_config_env.*
 *.env
-kafka/cluster_rig_config_env.env
-kafka/cluster_rig_config_env.py
+*_env.*
 
 # SCRATCH/BUILDING
 toDo.txt
 00 method.xlsx
-sim_LocoXOnOff.m
+/matlab/
 /kafka/scratch
 *scratchpad.py
 *scratch.py
 *scratch_*.py
 
 # IDE/TOOLS
+.venv
 *.vscode
 *.asv
 *.pyc
